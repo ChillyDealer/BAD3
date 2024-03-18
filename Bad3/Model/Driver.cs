@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bad3.Model
 {
-	internal class Driver
+	public class Driver
 	{
 		[Key]
 		public int DriverId { get; set; }

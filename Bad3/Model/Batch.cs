@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bad3.Model
 {
-	internal class Batch
+	public class Batch
 	{
 		[Key]
 		public int BatchId { get; set; }

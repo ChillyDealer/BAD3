@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bad3.Model
 {
-	internal class Stock
+	public class Stock
 	{
 		[Key]
 		public int StockId { get; set; }

@@ -15,9 +15,9 @@ public class BakeryController : ControllerBase
         _context = context;
     }
     
-    // [HttpGet(Name = "GetOrder")]
-    // public async Task<Order> GetOrder()
-    // {
-    //     return 
-    // }
+    [HttpGet(Name = "GetOrder")]
+    public async Task<Order> GetOrder()
+    {
+        return new Order(){CustomerId = 123};
+    }
 }

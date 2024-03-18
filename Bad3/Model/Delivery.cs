@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bad3.Model
 {
-	internal class Delivery
+	public class Delivery
 	{
 		[Key]
 		public int DeliveryId { get; set; }
