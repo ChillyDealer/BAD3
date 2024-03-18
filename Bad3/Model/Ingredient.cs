@@ -1,7 +1,16 @@
-﻿namespace Bad3;
+﻿using Bad3.Model;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Bad3;
 public class Ingredient
 {
-	public int Id { get; set; }
+	[Key]
+	public int IngredientId { get; set; }
+	[Required]
 	public string Name { get; set; }
-	// add stockid as foreign key
+	[ForeignKey("Stock")]
+	public int StockId { get; set; }
+	public virtual Stock Stock { get; set; }
+	public virtual ICollection<IngredientBatch> IngredientBatches { get; set; }
 }
