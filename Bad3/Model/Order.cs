@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bad3.Model
 {
-	internal class Order
+	public class Order
 	{
 	}//nuggets
 }
