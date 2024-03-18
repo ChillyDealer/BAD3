@@ -9,6 +9,6 @@ public class BakeryDbContext : DbContext
         : base(options)
     {
     }
-    
+
     public DbSet<Order> Orders => Set<Order>();
 }
