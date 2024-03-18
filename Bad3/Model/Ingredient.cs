@@ -1,4 +1,4 @@
-﻿namespace BAD3;
+﻿namespace Bad3;
 
 public class Ingredient
 {
