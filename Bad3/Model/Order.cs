@@ -8,5 +8,5 @@ namespace Bad3.Model
 {
 	internal class Order
 	{
-	}
+	}//nuggets
 }

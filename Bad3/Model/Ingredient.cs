@@ -1,5 +1,4 @@
 ﻿namespace Bad3;
-
 public class Ingredient
 {
 	public int Id { get; set; }
