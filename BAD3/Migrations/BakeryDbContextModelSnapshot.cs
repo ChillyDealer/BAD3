@@ -34,7 +34,7 @@ namespace BAD3.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StockId")
+                    b.Property<int>("StockId")
                         .HasColumnType("int");
 
                     b.HasKey("IngredientId");
@@ -234,9 +234,13 @@ namespace BAD3.Migrations
 
             modelBuilder.Entity("Bad3.Ingredient", b =>
                 {
-                    b.HasOne("Bad3.Model.Stock", null)
+                    b.HasOne("Bad3.Model.Stock", "Stock")
                         .WithMany("Ingredients")
-                        .HasForeignKey("StockId");
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Bad3.Model.Delivery", b =>

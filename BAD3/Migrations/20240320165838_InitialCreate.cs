@@ -131,7 +131,7 @@ namespace BAD3.Migrations
                     IngredientId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StockId = table.Column<int>(type: "int", nullable: true)
+                    StockId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,7 +140,8 @@ namespace BAD3.Migrations
                         name: "FK_Ingredient_Stock_StockId",
                         column: x => x.StockId,
                         principalTable: "Stock",
-                        principalColumn: "StockId");
+                        principalColumn: "StockId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
