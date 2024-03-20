@@ -21,20 +21,18 @@ public class SeedController : ControllerBase
     {
         Customer cuh = new Customer
         {
-            CustomerID = 1,
             CustomerName = "Hej",
             Orders = new Collection<Order>()
         };
-
-        if (!_context.Customers.Any(c => c.CustomerID == cuh.CustomerID))
+    
+        if (!_context.Customer.Any(c => c.CustomerID == cuh.CustomerID))
         {
-            await _context.Customers.AddAsync(cuh);
+            await _context.Customer.AddAsync(cuh);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(SeedDb), new { id = cuh.CustomerID }, cuh);
         }
         else
         {
-            Console.WriteLine("no");
             return Conflict("Customer already exists.");
         }
     }
