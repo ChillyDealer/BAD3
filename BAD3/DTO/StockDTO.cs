@@ -1,15 +1,14 @@
-﻿using BAD3.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Bad3.DTO
 {
-    public class StockDTO
-    {
-        [Required]
-        public int StockId { get; set; }
+	public class StockDTO
+	{
+		[Required]
+		public int StockId { get; set; }
 
-        [Required]
-        public int Quantity { get; set; }
-    }
+		[Required]
+		public int Quantity { get; set; }
+	}
 }

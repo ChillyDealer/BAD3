@@ -1,20 +1,19 @@
-﻿using BAD3.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Bad3.DTO
 {
-    public class BatchDTO
-    {
-        [Required]
-        public int BatchId { get; set; }
+	public class BatchDTO
+	{
+		[Required]
+		public int BatchId { get; set; }
 
-        [Required]
-        public DateTime StartTime { get; set; }
+		[Required]
+		public DateTime StartTime { get; set; }
 
-        [Required]
-        public DateTime EndTime { get; set; }
+		[Required]
+		public DateTime EndTime { get; set; }
 
-        public string Delay { get; set; }
-    }
+		public string Delay { get; set; }
+	}
 }

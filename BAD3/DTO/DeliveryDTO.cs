@@ -1,17 +1,16 @@
-﻿using BAD3.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Bad3.DTO
 {
-    public class DeliveryDTO
-    {
-        [Required]
-        public int TrackId { get; set; }
+	public class DeliveryDTO
+	{
+		[Required]
+		public int TrackId { get; set; }
 
-        public string Address { get; set; }
+		public string Address { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
-    }
+		[Required]
+		public DateTime Date { get; set; }
+	}
 }
