@@ -27,5 +27,8 @@ namespace Bad3.Model
 
 		[ForeignKey("Order")]
 		public int OrderId { get; set; }
+
+		// Address for order
+		public virtual Order Order { get; set; }
 	}
 }

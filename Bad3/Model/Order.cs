@@ -18,5 +18,9 @@ namespace Bad3.Model
 		public int CustomerId { get; set; }
 		public Customer Customer { get; set; }
 		public ICollection<GoodsOrder> GoodsOrders { get; set; }
+
+		// use address from delivery
+		public virtual Delivery Delivery { get; set; }
 	}
+
 }

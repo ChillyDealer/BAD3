@@ -87,22 +87,32 @@ namespace Bad3.Controllers
 		[HttpDelete("DeleteIngredient")]
 		public async Task<IActionResult> DeleteIngredient([FromQuery] string name)
 		{
-			var stock = await _context.Stock
-				.Include(s => s.Ingredients)
-				.FirstOrDefaultAsync(s => s.Ingredients.Any(i => i.Name == name)); // find the item
+			var ingredient = await _context.Ingredient
+										  .Include(i => i.Stock)
+										  .SingleOrDefaultAsync(i => i.Name == name);
 
-			if (stock == null)
-				return NotFound($"{name} not found");
-
-			var ingredient = stock.Ingredients.FirstOrDefault(i => i.Name == name);
-			if (ingredient != null)
+			if (ingredient == null)
 			{
-				_context.Ingredient.Remove(ingredient);
-				await _context.SaveChangesAsync(); // commit delete
-				return Ok($"{name} deleted");
+				return NotFound($"{name} not found");
 			}
 
-			return NotFound($"{name} not found");
+			_context.Ingredient.Remove(ingredient);
+
+			// see if others are linked to same stock
+			bool hasOtherIngredients = await _context.Ingredient.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientId != ingredient.IngredientId);
+			if (!hasOtherIngredients)
+			{
+				var stock = await _context.Stock.FindAsync(ingredient.StockId);
+				if (stock != null)
+				{
+					// delete stock associated with ingredient
+					_context.Stock.Remove(stock);
+				}
+			}
+
+			await _context.SaveChangesAsync(); // commit delete
+
+			return Ok($"{name} deleted");
 		}
 	}
 }
