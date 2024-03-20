@@ -14,6 +14,6 @@ namespace Bad3.Model
 
 		[Required]
 		public string CustomerName { get; set; } = string.Empty;
-		public virtual ICollection<Order> Orders { get; set; }
+		public ICollection<Order> Orders { get; set; }
 	}
 }

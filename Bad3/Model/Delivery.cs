@@ -12,14 +12,20 @@ namespace Bad3.Model
 	{
 		[Key]
 		public int DeliveryId { get; set; }
+
+		[Required]
+		public string TrackId { get; set; }
+
 		[Required]
 		public string Address { get; set; }
-		[Required]
-		public string TrackID { get; set; }
+
 		[Required]
 		public DateTime Date { get; set; }
+
 		[ForeignKey("Driver")]
 		public int DriverId { get; set; }
-		public virtual Driver Driver { get; set; }
+
+		[ForeignKey("Order")]
+		public int OrderId { get; set; }
 	}
 }

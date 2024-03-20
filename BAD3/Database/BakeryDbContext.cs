@@ -10,17 +10,16 @@ public class BakeryDbContext : DbContext
 	{
 	}
 
-	public DbSet<Customer> Customers => Set<Customer>();
-	public DbSet<Order> Orders => Set<Order>();
+	public DbSet<Customer> Customer => Set<Customer>();
+	public DbSet<Order> Order => Set<Order>();
 	public DbSet<Goods> Goods => Set<Goods>();
-	public DbSet<Batch> Batches => Set<Batch>();
-	public DbSet<Ingredient> Ingredients => Set<Ingredient>();
-	public DbSet<Stock> Stocks => Set<Stock>();
-	public DbSet<Delivery> Deliveries => Set<Delivery>();
-	public DbSet<Driver> Drivers => Set<Driver>();
-	public DbSet<GoodsOrder> GoodsOrders => Set<GoodsOrder>();
-	public DbSet<BatchGoods> BatchGoods => Set<BatchGoods>();
-	public DbSet<IngredientBatch> IngredientBatches => Set<IngredientBatch>();
+	public DbSet<Batch> Batch => Set<Batch>();
+	public DbSet<Ingredient> Ingredient => Set<Ingredient>();
+	public DbSet<Stock> Stock => Set<Stock>();
+	public DbSet<Delivery> Delivery => Set<Delivery>();
+	public DbSet<Driver> Driver => Set<Driver>();
+	public DbSet<GoodsOrder> GoodsOrder => Set<GoodsOrder>();
+	public DbSet<IngredientBatch> IngredientBatch => Set<IngredientBatch>();
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
@@ -29,10 +28,6 @@ public class BakeryDbContext : DbContext
 		// Goods + Order
 		modelBuilder.Entity<GoodsOrder>()
 			.HasKey(go => new { go.GoodsId, go.OrderId });
-
-		// Batch + Goods
-		modelBuilder.Entity<BatchGoods>()
-			.HasKey(bg => new { bg.BatchId, bg.GoodsId });
 
 		// Ingredient + Batch
 		modelBuilder.Entity<IngredientBatch>()
