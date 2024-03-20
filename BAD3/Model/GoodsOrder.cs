@@ -5,12 +5,15 @@ namespace Bad3.Model
 {
 	public class GoodsOrder
 	{
-		[Key, ForeignKey("Goods")]
-		public int GoodsId { get; set; }
-		public virtual Goods Goods { get; set; }
-
-		[Key, ForeignKey("Order")]
+		[ForeignKey("Order")]
 		public int OrderId { get; set; }
-		public virtual Order Order { get; set; }
+		public Order Order { get; set; }
+
+		[ForeignKey("Goods")]
+		public int GoodsId { get; set; }
+		public Goods Goods { get; set; }
+
+		[Required]
+		public int Quantity { get; set; }
 	}
 }

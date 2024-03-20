@@ -1,4 +1,5 @@
 ﻿using Bad3.Database;
+using Bad3.DTO;
 using Bad3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,78 +19,110 @@ public class BakeryController : ControllerBase
 		_context = context;
 	}
 
-	// Add a new ingredient with stock quantity
-	[HttpPost]
-	public async Task<ActionResult<Ingredient>> AddIngredient([FromBody] Ingredient ingredient, int stockQuantity)
+	// GET: bakery/ingredient?name=flour
+	[HttpGet("ingredient")]
+	public async Task<ActionResult<Ingredient>> GetIngredient(string name)
 	{
-		var existingStock = await _context.Stocks.FirstOrDefaultAsync(s => s.Name == ingredient.Name);
-		if (existingStock == null)
-		{
-			var newStock = new Stock { Name = ingredient.Name, Quantity = stockQuantity };
-			_context.Stocks.Add(newStock);
-			ingredient.Stock = newStock;
-		}
-		else
-		{
-			existingStock.Quantity += stockQuantity;
-			ingredient.Stock = existingStock;
-		}
+		var ingredient = await _context.Ingredient
+			.Include(i => i.Stock)
+			.FirstOrDefaultAsync(i => i.Name.ToLower() == name.ToLower());
 
-		_context.Ingredients.Add(ingredient);
-		await _context.SaveChangesAsync();
-		return CreatedAtAction(nameof(GetIngredientByName), new { name = ingredient.Name }, ingredient);
-	}
-
-	// Get an ingredient by Name
-	[HttpGet("{name}")]
-	public async Task<ActionResult<Ingredient>> GetIngredientByName(string name)
-	{
-		var ingredient = await _context.Ingredients
-									  .Include(i => i.Stock)
-									  .Where(i => i.Name == name)
-									  .FirstOrDefaultAsync();
 		if (ingredient == null)
 		{
 			return NotFound();
 		}
+
 		return ingredient;
 	}
 
-	// Update an ingredient's stock by Name
-	[HttpPut("{name}")]
-	public async Task<IActionResult> UpdateIngredientStock(string name, int newStockQuantity)
+	// POST: bakery/ingredient
+	[HttpPost("ingredient")]
+	public async Task<ActionResult<Ingredient>> PostIngredient([FromBody] IngredientDTO ingredientDTO)
 	{
-		var ingredient = await _context.Ingredients
-									  .Include(i => i.Stock)
-									  .Where(i => i.Name == name)
-									  .FirstOrDefaultAsync();
-		if (ingredient == null || ingredient.Stock == null)
+		if (ingredientDTO == null || string.IsNullOrEmpty(ingredientDTO.Name))
 		{
-			return NotFound();
+			return BadRequest("Invalid ingredient data.");
 		}
 
-		ingredient.Stock.Quantity = newStockQuantity;
-		_context.Entry(ingredient.Stock).State = EntityState.Modified;
+		if (_context.Stock.Any(s => s.Name.ToLower() == ingredientDTO.Name.ToLower()))
+		{
+			return BadRequest("Ingredient already exists.");
+		}
+
+		var stock = new Stock
+		{
+			Name = ingredientDTO.Name,
+			Quantity = ingredientDTO.Quantity
+		};
+
+		var ingredient = new Ingredient
+		{
+			Name = ingredientDTO.Name,
+			Stock = stock
+		};
+
+		_context.Ingredient.Add(ingredient);
 		await _context.SaveChangesAsync();
 
-		return NoContent();
+		return CreatedAtAction(nameof(GetIngredient), new { name = ingredient.Name }, ingredient);
 	}
 
-	// Delete an ingredient by Name
-	[HttpDelete("{name}")]
-	public async Task<IActionResult> DeleteIngredientByName(string name)
+
+	// PUT: bakery/ingredient?name=flour
+	[HttpPut("ingredient")]
+	public async Task<IActionResult> PutIngredient(string name, int quantity)
 	{
-		var ingredient = await _context.Ingredients
-									  .Where(i => i.Name == name)
-									  .FirstOrDefaultAsync();
+		var ingredient = await _context.Ingredient
+			.Include(i => i.Stock)
+			.FirstOrDefaultAsync(i => i.Name.ToLower() == name.ToLower());
+
 		if (ingredient == null)
 		{
 			return NotFound();
 		}
 
-		_context.Ingredients.Remove(ingredient);
+		ingredient.Stock.Quantity = quantity;
+		_context.Entry(ingredient).State = EntityState.Modified;
+
+		try
+		{
+			await _context.SaveChangesAsync();
+		}
+		catch (DbUpdateConcurrencyException)
+		{
+			if (!IngredientExists(ingredient.IngredientId))
+			{
+				return NotFound();
+			}
+			else
+			{
+				throw;
+			}
+		}
+
+		return NoContent();
+	}
+
+	// DELETE: bakery/ingredient?name=flour
+	[HttpDelete("ingredient")]
+	public async Task<IActionResult> DeleteIngredient(string name)
+	{
+		var ingredient = await _context.Ingredient
+			.FirstOrDefaultAsync(i => i.Name.ToLower() == name.ToLower());
+
+		if (ingredient == null)
+		{
+			return NotFound();
+		}
+
+		_context.Ingredient.Remove(ingredient);
 		await _context.SaveChangesAsync();
 
 		return NoContent();
+	}
+
+	private bool IngredientExists(int id)
+	{
+		return _context.Ingredient.Any(e => e.IngredientId == id);
 	}
 }

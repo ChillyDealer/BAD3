@@ -20,6 +20,5 @@ namespace Bad3.Model
 		[Required]
 		public int Quantity { get; set; }
 		public virtual ICollection<GoodsOrder> GoodsOrders { get; set; }
-		public virtual ICollection<BatchGoods> BatchGoods { get; set; }
 	}
 }

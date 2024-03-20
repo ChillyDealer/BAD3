@@ -5,12 +5,15 @@ namespace Bad3.Model
 {
 	public class IngredientBatch
 	{
-		[Key, ForeignKey("Ingredient")]
-		public int IngredientId { get; set; }
-		public virtual Ingredient Ingredient { get; set; }
-
-		[Key, ForeignKey("Batch")]
+		[ForeignKey("Batch")]
 		public int BatchId { get; set; }
-		public virtual Batch Batch { get; set; }
+		public Batch Batch { get; set; }
+
+		[ForeignKey("Ingredients")]
+		public int IngredientId { get; set; }
+		public Ingredient Ingredients { get; set; }
+
+		[Required]
+		public int Quantity { get; set; }
 	}
 }

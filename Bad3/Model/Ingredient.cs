@@ -9,8 +9,9 @@ public class Ingredient
 	public int IngredientId { get; set; }
 	[Required]
 	public string Name { get; set; }
+
 	[ForeignKey("Stock")]
 	public int StockId { get; set; }
 	public virtual Stock Stock { get; set; }
-	public virtual ICollection<IngredientBatch> IngredientBatches { get; set; }
+	public ICollection<IngredientBatch> IngredientBatch { get; set; }
 }

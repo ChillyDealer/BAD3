@@ -15,10 +15,8 @@ namespace Bad3.Model
 		public DateTime StartTime { get; set; }
 		[Required]
 		public DateTime EndTime { get; set; }
-
 		[Required]
 		public int Delay { get; set; }
-		public virtual ICollection<BatchGoods> BatchGoods { get; set; }
-		public virtual ICollection<IngredientBatch> IngredientBatches { get; set; }
+		public ICollection<IngredientBatch> IngredientBatch { get; set; }
 	}
 }

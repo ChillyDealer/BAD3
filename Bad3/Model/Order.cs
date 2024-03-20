@@ -16,7 +16,7 @@ namespace Bad3.Model
 		public DateTime OrderDate { get; set; }
 		[ForeignKey("Customer")]
 		public int CustomerId { get; set; }
-		public virtual Customer Customer { get; set; }
-		public virtual ICollection<GoodsOrder> GoodsOrders { get; set; }
+		public Customer Customer { get; set; }
+		public ICollection<GoodsOrder> GoodsOrders { get; set; }
 	}
 }
