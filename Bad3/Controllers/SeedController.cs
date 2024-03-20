@@ -19,17 +19,43 @@ public class SeedController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> SeedDb()
     {
-        Customer cuh = new Customer
+        var order = new Order
+        {
+            OrderDate = DateTime.Now
+        };
+        
+        var customer = new Customer
         {
             CustomerName = "Hej",
             Orders = new Collection<Order>()
+            {
+                order
+            }
         };
-    
-        if (!_context.Customer.Any(c => c.CustomerID == cuh.CustomerID))
+
+        var good = new Goods
         {
-            await _context.Customer.AddAsync(cuh);
+            GoodName = "Sugar",
+            Validity = new DateTime(2024, 8, 18),
+            Quantity = 40
+        };
+
+        var goodsOrder = new GoodsOrder
+        {
+            GoodsId = 3,
+            OrderId = 1,
+            Quantity = 20
+        };
+        
+        await _context.Goods.AddAsync(good);
+        await _context.GoodsOrder.AddAsync(goodsOrder);
+        await _context.SaveChangesAsync();
+    
+        if (!_context.Customer.Any(c => c.CustomerID == customer.CustomerID))
+        {
+            await _context.Customer.AddAsync(customer);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(SeedDb), new { id = cuh.CustomerID }, cuh);
+            return CreatedAtAction(nameof(SeedDb), new { id = customer.CustomerID }, customer);
         }
         else
         {
