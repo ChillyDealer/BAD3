@@ -88,7 +88,9 @@ public class SeedController : ControllerBase
 		var batch = new Batch
 		{
 			StartTime = DateTime.Now,
-			EndTime = new DateTime(2024, 3, 22, 12, 30, 0)
+			EndTime = new DateTime(2024, 3, 22, 12, 30, 0),
+			Delay = 6
+			
 		};
 		if (!_context.Batch.Any(e => e.BatchId == batch.BatchId))
 		{
