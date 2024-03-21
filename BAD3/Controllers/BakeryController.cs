@@ -24,7 +24,9 @@ namespace Bad3.Controllers
 			var ingredients = await _context.Ingredient.Include(i => i.Stock).Select(i => new IngredientDTO
 			{
 				Name = i.Name,
-				Quantity = i.Stock.Quantity
+				Quantity = i.Stock.Quantity,
+				Allergens = i.Allergens,
+				
 			}).ToListAsync();
 
 			return Ok(ingredients);
@@ -41,13 +43,14 @@ namespace Bad3.Controllers
 			{
 				Name = ingredientDto.Name,
 				Quantity = ingredientDto.Quantity,
-				Ingredients = new List<Ingredient>() // collection of intredients
+				Ingredients = new List<Ingredient>() // collection of ingredients
 			};
 
 			var ingredient = new Ingredient // assigning the new vars
 			{
 				Name = ingredientDto.Name,
-				Stock = stock
+				Stock = stock,
+				Allergens = ingredientDto.Allergens
 			};
 
 			stock.Ingredients.Add(ingredient);
@@ -55,8 +58,9 @@ namespace Bad3.Controllers
 			_context.Stock.Add(stock); // add to database
 			await _context.SaveChangesAsync();
 
-			return Ok($"{ingredientDto.Name} added with quantity {ingredientDto.Quantity}");
+			return Ok($"{ingredientDto.Name} added with quantity {ingredientDto.Quantity} and allergens {ingredientDto.Allergens}");
 		}
+
 
 		// PUT
 		[HttpPut("UpdateIngredient")]

@@ -15,6 +15,7 @@ namespace Bad3.Model
 		public string Name { get; set; }
 		[Required]
 		public int Quantity { get; set; }
+
 		public virtual ICollection<Ingredient> Ingredients { get; set; }
 
 	}
