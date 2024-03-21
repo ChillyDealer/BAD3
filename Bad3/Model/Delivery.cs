@@ -18,6 +18,9 @@ namespace Bad3.Model
 
 		[Required]
 		public string Address { get; set; }
+		
+		[Required]
+		public string Coordinates { get; set; }
 
 		[Required]
 		public DateTime Date { get; set; }

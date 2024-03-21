@@ -8,7 +8,11 @@ namespace Bad3.DTO
 		[Required]
 		public int TrackId { get; set; }
 
+		[Required]
 		public string Address { get; set; }
+		
+		[Required]
+		public string Coordinates { get; set; }
 
 		[Required]
 		public DateTime Date { get; set; }
