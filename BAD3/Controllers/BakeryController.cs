@@ -80,8 +80,9 @@ namespace Bad3.Controllers
 			if (ingredient != null)
 			{
 				stock.Quantity = ingredientDto.Quantity; // update quant
+				ingredient.Allergens = ingredientDto.Allergens; // update allergens
 				await _context.SaveChangesAsync(); // save
-				return Ok($"{ingredient.Name} quantity updated to {ingredientDto.Quantity}");
+				return Ok($"{ingredient.Name} quantity updated to {ingredientDto.Quantity} and allergens to {ingredientDto.Allergens}");
 			}
 
 			return NotFound($"{ingredientDto.Name} not found");
