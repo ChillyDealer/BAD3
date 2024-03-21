@@ -23,15 +23,6 @@ public class SeedController : ControllerBase
 		{
 			OrderDate = DateTime.Now
 		};
-		// if (!_context.Order.Any(e => e.OrderId == order.OrderId))
-		// {
-		//     await _context.Order.AddAsync(order);
-		//     await _context.SaveChangesAsync();
-		// }
-		// else
-		// {
-		//     Console.WriteLine("Order already exists.");
-		// }
 
 		var customer = new Customer
 		{
@@ -74,15 +65,6 @@ public class SeedController : ControllerBase
 			Date = new DateTime(2024, 4, 1),
 			Order = order // order use address
 		};
-		// if (!_context.Delivery.Any(e => e.DeliveryId == delivery.DeliveryId))
-		// {
-		//     await _context.Delivery.AddAsync(delivery);
-		//     await _context.SaveChangesAsync();
-		// }
-		// else
-		// {
-		//     Console.WriteLine("Delivery already exists.");
-		// }
 
 		var driver = new Driver
 		{
@@ -122,17 +104,6 @@ public class SeedController : ControllerBase
 			Name = "Sugar",
 			StockId = 1
 		};
-		await _context.Ingredient.AddAsync(ingredient);
-		await _context.SaveChangesAsync();
-		// if (!_context.Ingredient.Any(e => e.IngredientId == ingredient.IngredientId))
-		// {
-		//     await _context.Ingredient.AddAsync(ingredient);
-		//     await _context.SaveChangesAsync();
-		// }
-		// else
-		// {
-		//     Console.WriteLine("Ingrenit already exists.");
-		// }
 
 		var stock = new Stock
 		{
@@ -177,8 +148,7 @@ public class SeedController : ControllerBase
 			IngredientId = ingredient.IngredientId,
 			Quantity = 80
 		};
-		await _context.IngredientBatch.AddAsync(ingredientBatch);
-		await _context.SaveChangesAsync();
+
 		if (!_context.IngredientBatch.Any(e => e.BatchId == ingredientBatch.BatchId) &&
 			!_context.IngredientBatch.Any(e => e.IngredientId == ingredientBatch.IngredientId))
 		{
