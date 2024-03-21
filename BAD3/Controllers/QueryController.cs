@@ -86,7 +86,7 @@ namespace Bad3.Controllers
 		{
 			var trackIds = await _context.Delivery
 				.Where(d => d.OrderId == orderId)
-				.Select(d => d.TrackId)
+				.Select(d => new {d.TrackId, d.Coordinates})
 				.ToListAsync();
 
 			if (trackIds == null || !trackIds.Any())

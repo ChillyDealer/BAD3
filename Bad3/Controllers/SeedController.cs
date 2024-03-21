@@ -62,6 +62,7 @@ public class SeedController : ControllerBase
 		{
 			TrackId = "1",
 			Address = "Gammelvej 4",
+			Coordinates = "18.299803, -64.825582",
 			Date = new DateTime(2024, 4, 1, 12, 45, 0),
 			Order = order // order use address
 		};
