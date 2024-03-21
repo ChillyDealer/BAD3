@@ -49,7 +49,7 @@ namespace Bad3.Controllers
 		}
 
 		// Query 3: Get the list of baked goods in an order
-		[HttpGet("GetGoodsInOrder/{orderId}")]
+		[HttpGet("GetGoodsInOrder/{orderId from GoodsOrder}")]
 		public async Task<ActionResult> GetGoodsInOrder(int orderId)
 		{
 			var goodsList = await _context.GoodsOrder
