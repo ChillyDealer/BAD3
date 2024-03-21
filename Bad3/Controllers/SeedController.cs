@@ -45,7 +45,7 @@ public class SeedController : ControllerBase
 		var good = new Goods
 		{
 			GoodName = "Strawberry Cake",
-			Validity = new DateTime(2024, 8, 18),
+			Validity = new DateTime(2024, 8, 18, 22, 30, 0),
 			Quantity = 40
 		};
 		if (!_context.Goods.Any(e => e.GoodsId == good.GoodsId))
@@ -62,7 +62,7 @@ public class SeedController : ControllerBase
 		{
 			TrackId = "1",
 			Address = "Gammelvej 4",
-			Date = new DateTime(2024, 4, 1),
+			Date = new DateTime(2024, 4, 1, 12, 45, 0),
 			Order = order // order use address
 		};
 
@@ -87,7 +87,7 @@ public class SeedController : ControllerBase
 		var batch = new Batch
 		{
 			StartTime = DateTime.Now,
-			EndTime = new DateTime(2024, 3, 22, 12, 30, 10)
+			EndTime = new DateTime(2024, 3, 22, 12, 30, 0)
 		};
 		if (!_context.Batch.Any(e => e.BatchId == batch.BatchId))
 		{
