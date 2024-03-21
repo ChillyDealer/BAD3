@@ -6,6 +6,9 @@ namespace Bad3.DTO
 	{
 		[Required]
 		public string Name { get; set; }
+		
+		[Required]
+		public string Allergens { get; set; }
 
 		[Required]
 		public int Quantity { get; set; }

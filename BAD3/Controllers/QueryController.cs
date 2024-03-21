@@ -71,7 +71,7 @@ namespace Bad3.Controllers
 			var ingredients = await _context.IngredientBatch
 				.Where(ib => ib.BatchId == batchId)
 				.Include(ib => ib.Ingredients)
-				.Select(ib => new { ib.Ingredients.Name, ib.Quantity })
+				.Select(ib => new { ib.Ingredients.Name, ib.Ingredients.Allergens, ib.Quantity })
 				.ToListAsync();
 
 			if (ingredients == null || !ingredients.Any())

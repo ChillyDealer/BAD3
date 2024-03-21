@@ -102,6 +102,7 @@ public class SeedController : ControllerBase
 		var ingredient = new Ingredient
 		{
 			Name = "Sugar",
+			Allergens = "Nuts",
 			StockId = 1
 		};
 

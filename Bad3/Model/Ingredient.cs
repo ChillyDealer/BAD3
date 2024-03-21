@@ -9,6 +9,8 @@ public class Ingredient
 	public int IngredientId { get; set; }
 	[Required]
 	public string Name { get; set; }
+	[Required]
+	public string Allergens { get; set; }
 
 	[ForeignKey("Stock")]
 	public int StockId { get; set; }
