@@ -9,6 +9,6 @@ namespace Bad3.DTO
 		public int OrderId { get; set; }
 
 		[Required]
-		public DateTime OrderDate { get; set; }
+		public string OrderDate { get; set; }
 	}
 }

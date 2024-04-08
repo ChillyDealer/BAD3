@@ -11,6 +11,6 @@ namespace Bad3.DTO
 		[Required]
 		public int Quantity { get; set; }
 
-		public DateTime Validity { get; set; }
+		public string Validity { get; set; }
 	}
 }

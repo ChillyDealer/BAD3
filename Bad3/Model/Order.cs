@@ -13,7 +13,7 @@ namespace Bad3.Model
 		[Key]
 		public int OrderId { get; set; }
 		[Required]
-		public DateTime OrderDate { get; set; }
+		public string OrderDate { get; set; }
 		[ForeignKey("Customer")]
 		public int CustomerId { get; set; }
 		public Customer Customer { get; set; }

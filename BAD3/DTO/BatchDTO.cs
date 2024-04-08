@@ -9,10 +9,10 @@ namespace Bad3.DTO
 		public int BatchId { get; set; }
 
 		[Required]
-		public DateTime StartTime { get; set; }
+		public string StartTime { get; set; }
 
 		[Required]
-		public DateTime EndTime { get; set; }
+		public string EndTime { get; set; }
 
 		public string Delay { get; set; }
 	}

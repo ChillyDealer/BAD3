@@ -12,9 +12,9 @@ namespace Bad3.Model
 		[Key]
 		public int BatchId { get; set; }
 		[Required]
-		public DateTime StartTime { get; set; }
+		public string StartTime { get; set; }
 		[Required]
-		public DateTime EndTime { get; set; }
+		public string EndTime { get; set; }
 		[Required]
 		public int Delay { get; set; }
 		public ICollection<IngredientBatch> IngredientBatch { get; set; }

@@ -8,11 +8,11 @@ namespace Bad3.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class StockController : ControllerBase
+	public class IngredientsController : ControllerBase
 	{
 		private readonly BakeryDbContext _context;
 
-		public StockController(BakeryDbContext context)
+		public IngredientsController (BakeryDbContext context)
 		{
 			_context = context;
 		}
@@ -26,7 +26,7 @@ namespace Bad3.Controllers
 				Name = i.Name,
 				Quantity = i.Stock.Quantity,
 				Allergens = i.Allergens,
-				
+
 			}).ToListAsync();
 
 			return Ok(ingredients);

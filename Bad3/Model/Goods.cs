@@ -16,7 +16,7 @@ namespace Bad3.Model
 		[Required]
 		public string GoodName { get; set; }
 		[Required]
-		public DateTime Validity { get; set; }
+		public string Validity { get; set; }
 		[Required]
 		public int Quantity { get; set; }
 		public virtual ICollection<GoodsOrder> GoodsOrders { get; set; }
